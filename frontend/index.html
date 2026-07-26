@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Overview - Warehouse App</title>
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div id="toastContainer" class="toast-container"></div>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item active">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="layout-dashboard"></i></span><span>Dashboard</span></div>
+        </a>
+
+        <div class="nav-group open" id="persediaanGroup">
+          <div class="nav-item" id="persediaanGroupToggle">
+            <div class="nav-item-content"><span class="nav-item-icon"><i
+                  data-lucide="package"></i></span><span>Persediaan</span></div>
+            <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </div>
+          <div class="nav-submenu">
+            <a href="katalog-barang.html" class="submenu-item"><span>Katalog Barang</span></a>
+            <a href="barang-masuk.html" class="submenu-item"><span>Barang Masuk</span></a>
+            <a href="barang-keluar.html" class="submenu-item"><span>Barang Keluar</span></a>
+            <a href="stok-opname.html" class="submenu-item"><span>Stok Opname</span></a>
+            <a href="stok-minimum.html" class="submenu-item"><span>Cek Stok Minimum</span></a>
+          </div>
+        </div>
+
+        <a href="pemasok.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="truck"></i></span><span>Pemasok</span></div>
+        </a>
+        <a href="karyawan.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="users"></i></span><span>Karyawan</span></div>
+        </a>
+        <a href="aset.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="boxes"></i></span><span>Aset Gudang</span></div>
+        </a>
+        <a href="laporan.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="file-bar-chart"></i></span><span>Laporan</span></div>
+        </a>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <div class="nav-item" id="logoutBtn">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="log-out"></i></span><span>Logout</span></div>
+        </div>
+      </footer>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-brand">
+          <div class="brand-icon"><img src="assets/images/logo.png" alt="LogiTrack Pro Logo" class="brand-logo-img" /></div>
+          <div class="brand-info"><span class="brand-name">LogiTrack Pro</span><span class="brand-sub">Warehouse ID:
+              WH-882</span></div>
+        </div>
+
+        <div class="header-search">
+          <span class="header-search-icon"><i data-lucide="search"></i></span>
+          <input type="text" id="globalSearchInput" class="header-search-input"
+            placeholder="Cari barang, SKU, transaksi..." />
+        </div>
+
+        <div class="header-actions">
+          <button type="button" id="refreshDataBtn" class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw"
+              style="width:14px;height:14px;"></i><span>Refresh Data</span></button>
+          <button type="button" id="notificationBtn" class="icon-button" title="Notifikasi"><i
+              data-lucide="bell"></i><span class="notification-badge-dot"></span></button>
+          <div class="user-profile-btn">
+            <div class="avatar" id="userAvatar">BS</div><span class="user-name" id="userNameDisplay">Budi
+              Santoso</span><span class="user-dropdown-caret"><i data-lucide="chevron-down"></i></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section id="viewDashboard" class="view-panel">
+          <header class="page-header">
+            <div class="page-title-box">
+              <h1>Dashboard</h1>
+              <p>Periksa situasi, barang, dan informasi umum lainnya</p>
+            </div>
+          </header>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-title">Total barang</span><span class="stat-icon">📦</span>
+              </div>
+              <div class="stat-value" id="statTotalBarang">8</div>
+              <div class="stat-footer-text"><span>SKU aktif</span><span class="kpi-trend up-good"
+                  id="trendTotalBarang">↑ 12% vs minggu lalu</span></div>
+            </div>
+            <div class="stat-card alert-border">
+              <div class="stat-card-top"><span class="stat-title">Stok Kritis</span><span
+                  class="stat-icon alert-icon"><i data-lucide="alert-triangle"></i></span></div>
+              <div class="stat-value text-danger" id="statStokKritis">3</div>
+              <div class="stat-footer-text danger"><span>Perlu penanganan</span><span class="kpi-trend down-good"
+                  id="trendStokKritis">↓ 2 SKU vs kemarin</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-title">Barang masuk</span><span class="stat-icon">↙</span>
+              </div>
+              <div class="stat-value" id="statBarangMasuk">6</div>
+              <div class="stat-footer-text"><span>Transaksi hari ini</span><span class="kpi-trend up-good"
+                  id="trendBarangMasuk">↑ 35% vs kemarin</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-title">Barang keluar</span><span class="stat-icon">↗</span>
+              </div>
+              <div class="stat-value" id="statBarangKeluar">3</div>
+              <div class="stat-footer-text"><span>Transaksi hari ini</span><span class="kpi-trend up-good"
+                  id="trendBarangKeluar">↑ 15% vs kemarin</span></div>
+            </div>
+          </div>
+
+          <div class="dashboard-split">
+            <div class="card-panel">
+              <header class="panel-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <h2 class="panel-title">Grafik Mutasi</h2>
+                  <div class="period-filter-group"><button type="button" class="period-btn active" data-period="7">7
+                      Hari</button><button type="button" class="period-btn" data-period="30">30 Hari</button><button
+                      type="button" class="period-btn" data-period="custom"
+                      title="Custom Range Placeholder">Custom</button></div>
+                </div>
+                <div class="chart-legend">
+                  <div class="legend-item"><span class="legend-dot inbound"></span><span>Inbound</span></div>
+                  <div class="legend-item"><span class="legend-dot outbound"></span><span>Outbound</span></div>
+                </div>
+              </header>
+              <div class="bar-chart-container" id="barChartContainer"></div>
+            </div>
+            <div class="card-panel">
+              <header class="panel-header">
+                <h2 class="panel-title text-danger">Stok barang kritis</h2>
+              </header>
+              <div class="critical-list" id="criticalStockList"></div><a href="stok-minimum.html"
+                class="panel-footer-btn">Lihat semua barang kritis</a>
+            </div>
+          </div>
+
+          <div class="dashboard-secondary-split">
+            <div class="card-panel">
+              <header class="panel-header">
+                <h2 class="panel-title">Kapasitas Gudang</h2>
+              </header>
+              <div class="capacity-list" id="warehouseCapacityList"></div>
+            </div>
+            <div class="card-panel">
+              <header class="panel-header">
+                <h2 class="panel-title">Aktivitas Terakhir</h2><button type="button" class="btn btn-secondary btn-sm"
+                  data-open-modal="inboundModal">+ Transaksi Baru</button>
+              </header>
+              <div class="table-container">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>WAKTU</th>
+                      <th>AKTIVITAS</th>
+                      <th>BARANG</th>
+                      <th>KUANTITAS</th>
+                      <th>PETUGAS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentActivitiesTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="inboundModal" class="modal-overlay">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3 class="modal-title">Transaksi Barang Masuk (Inbound)</h3><button type="button" class="modal-close-btn" data-close-modal="inboundModal">✕</button>
+      </header>
+      <form id="inboundForm">
+        <div class="modal-body">
+          <div class="form-group"><label for="inboundItemSelect" class="form-label">BARANG</label><div class="input-wrapper"><i data-lucide="package" class="input-icon"></i><select id="inboundItemSelect" class="form-select font-mono" required></select></div></div>
+          <div class="form-group"><label for="inboundSupplierSelect" class="form-label">PEMASOK</label><div class="input-wrapper"><i data-lucide="truck" class="input-icon"></i><select id="inboundSupplierSelect" class="form-select font-mono"></select></div></div>
+          <div class="form-group"><label for="inboundQtyInput" class="form-label">JUMLAH</label><div class="input-wrapper"><i data-lucide="hash" class="input-icon"></i><input type="number" id="inboundQtyInput" class="form-input font-mono" min="1" required /></div></div>
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label for="inboundDateInput" class="form-label" style="margin:0;">TANGGAL MASUK</label>
+              <button type="button" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:11px;" onclick="setTodayDate('inboundDateInput')">📅 Hari Ini</button>
+            </div>
+            <div class="input-wrapper"><i data-lucide="calendar" class="input-icon"></i><input type="date" id="inboundDateInput" class="form-input font-mono" required /></div>
+          </div>
+          <div class="form-group"><label for="inboundKetInput" class="form-label">KETERANGAN / DESKRIPSI</label><div class="input-wrapper"><i data-lucide="file-text" class="input-icon"></i><input type="text" id="inboundKetInput" class="form-input" placeholder="Restok persediaan rutin" required /></div></div>
+        </div>
+        <footer class="modal-footer"><button type="button" class="btn btn-secondary" data-close-modal="inboundModal">Batal</button><button type="submit" class="btn btn-primary">Simpan Barang Masuk</button></footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- TEMPLATES FOR PURE DOM CLONING -->
+  <template id="recentActivityRowTemplate">
+    <tr>
+      <td class="waktu font-mono text-muted"></td>
+      <td><span class="badge"></span></td>
+      <td class="barang font-mono" style="font-weight: 500;"></td>
+      <td class="kuantitas font-mono" style="font-weight: 600;"></td>
+      <td class="petugas text-muted"></td>
+    </tr>
+  </template>
+
+  <!-- JS Dependencies -->
+  <script src="js/models/inventory.model.js"></script>
+  <script src="js/services/storage.service.js"></script>
+  <script src="js/services/crud.service.js"></script>
+  <script src="js/services/inventory.service.js"></script>
+  <script src="js/components/toast.component.js"></script>
+  <script src="js/components/chart.component.js"></script>
+  <script src="js/views/tables.view.js"></script>
+  <script src="js/views/search.view.js"></script>
+  <script src="js/views/modals.view.js"></script>
+  <script src="js/views/dashboard.view.js"></script>
+</body>
+
+</html>

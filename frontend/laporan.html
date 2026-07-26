@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Terpadu - LogiTrack Pro WMS</title>
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .report-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
+    .report-tab-btn { padding: 8px 16px; border-radius: 6px; background: #f8fafc; border: 1px solid #cbd5e1; color: #475569; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .report-tab-btn.active { background: #004ac6; color: #ffffff; border-color: #004ac6; }
+    .kpi-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  </style>
+</head>
+
+<body>
+  <div id="toastContainer" class="toast-container"></div>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item"><span class="nav-item-content"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></span></a>
+        <div class="nav-group open" id="persediaanGroup">
+          <div class="nav-item" id="persediaanGroupToggle"><span class="nav-item-content"><i data-lucide="package"></i><span>Persediaan</span></span><i data-lucide="chevron-down" class="chevron-icon"></i></div>
+          <div class="nav-submenu">
+            <a href="katalog-barang.html" class="submenu-item">Katalog Barang</a>
+            <a href="barang-masuk.html" class="submenu-item">Barang Masuk</a>
+            <a href="barang-keluar.html" class="submenu-item">Barang Keluar</a>
+            <a href="stok-opname.html" class="submenu-item">Stok Opname</a>
+            <a href="stok-minimum.html" class="submenu-item">Cek Stok Minimum</a>
+          </div>
+        </div>
+        <a href="pemasok.html" class="nav-item"><span class="nav-item-content"><i data-lucide="truck"></i><span>Pemasok</span></span></a>
+        <a href="karyawan.html" class="nav-item"><span class="nav-item-content"><i data-lucide="users"></i><span>Karyawan</span></span></a>
+        <a href="aset.html" class="nav-item"><span class="nav-item-content"><i data-lucide="boxes"></i><span>Aset Gudang</span></span></a>
+        <a href="laporan.html" class="nav-item active"><span class="nav-item-content"><i data-lucide="file-bar-chart"></i><span>Laporan</span></span></a>
+      </nav>
+      <footer class="sidebar-footer">
+        <div class="nav-item" id="logoutBtn">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="log-out"></i></span><span>Logout</span></div>
+        </div>
+      </footer>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-brand"><div class="brand-icon"><img src="assets/images/logo.png" alt="LogiTrack Pro Logo" class="brand-logo-img" /></div><div class="brand-info"><span class="brand-name">LogiTrack Pro</span><span class="brand-sub">Warehouse ID: WH-882</span></div></div>
+        <div class="header-search"><span class="header-search-icon"><i data-lucide="search"></i></span><input type="text" id="globalSearchInput" class="header-search-input" placeholder="Cari laporan..." /></div>
+        <div class="header-actions">
+          <button type="button" id="refreshDataBtn" class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i><span>Refresh Data</span></button>
+          <div class="user-profile-btn">
+            <div class="avatar" id="userAvatar">BS</div><span class="user-name" id="userNameDisplay">Budi Santoso</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section id="viewLaporan" class="view-panel">
+          <header class="page-header">
+            <div class="page-title-box">
+              <h1>Laporan Terpadu Gudang</h1>
+              <p>Rekapitulasi stok persediaan, riwayat mutasi transaksi, dan laporan nilai finansial aset</p>
+            </div>
+          </header>
+
+          <div class="report-tabs">
+            <button type="button" class="report-tab-btn active" data-tab="tabLaporanStok"><i data-lucide="boxes" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>Laporan Stok Persediaan</button>
+            <button type="button" class="report-tab-btn" data-tab="tabLaporanTransaksi"><i data-lucide="arrow-left-right" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>Laporan Transaksi Mutasi</button>
+            <button type="button" class="report-tab-btn" data-tab="tabLaporanKeuangan"><i data-lucide="dollar-sign" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>Laporan Keuangan Aset</button>
+          </div>
+
+          <!-- TAB 1: LAPORAN STOK -->
+          <div id="tabLaporanStok" class="report-tab-pane">
+            <div class="card-panel">
+              <div class="table-container">
+                <table class="custom-table">
+                  <thead><tr><th>KODE (SKU)</th><th>NAMA BARANG</th><th>KATEGORI</th><th>SATUAN</th><th>AKUMULASI STOK AKHIR</th><th>STATUS</th></tr></thead>
+                  <tbody id="laporanStokTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: LAPORAN TRANSAKSI -->
+          <div id="tabLaporanTransaksi" class="report-tab-pane" style="display:none;">
+            <div class="card-panel">
+              <div class="table-container">
+                <table class="custom-table">
+                  <thead><tr><th>TANGGAL</th><th>JENIS MUTASI</th><th>BARANG</th><th>JUMLAH</th><th>PETUGAS</th><th>KETERANGAN / SUMBER</th></tr></thead>
+                  <tbody id="laporanTransaksiTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: LAPORAN KEUANGAN ASET -->
+          <div id="tabLaporanKeuangan" class="report-tab-pane" style="display:none;">
+            <div class="kpi-summary-grid">
+              <div class="stat-card"><div class="stat-card-title">TOTAL FINANSIAL ASET</div><div class="stat-card-value font-mono text-info" id="reportTotalFinancialAset">Rp 0</div></div>
+              <div class="stat-card"><div class="stat-card-title">TOTAL JENIS ASET</div><div class="stat-card-value font-mono" id="reportTotalJenisAset">0</div></div>
+              <div class="stat-card"><div class="stat-card-title">TOTAL FISIK UNIT</div><div class="stat-card-value font-mono" id="reportTotalUnitAset">0 Unit</div></div>
+            </div>
+            <div class="card-panel">
+              <div class="table-container">
+                <table class="custom-table">
+                  <thead><tr><th>NAMA ASET</th><th>KATEGORI</th><th>JUMLAH UNIT</th><th>NILAI PER UNIT</th><th>SUBTOTAL FINANSIAL</th></tr></thead>
+                  <tbody id="laporanKeuanganTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/models/inventory.model.js"></script>
+  <script src="js/services/storage.service.js"></script>
+  <script src="js/services/crud.service.js"></script>
+  <script src="js/services/inventory.service.js"></script>
+  <script src="js/components/toast.component.js"></script>
+  <script src="js/views/tables.view.js"></script>
+  <script src="js/views/search.view.js"></script>
+  <script src="js/views/laporan.view.js"></script>
+  <script src="js/views/dashboard.view.js"></script>
+</body>
+
+</html>

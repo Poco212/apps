@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Warehouse App - BUTTON COMPONENTS
+   File: frontend/css/components/buttons.css
+   ========================================================================== */
+
+@import url('../tokens.css');
+
+/* --- Base Button Reset & Layout --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 44px;
+  padding: 0 var(--sp-5);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Primary Solid Button (Clean Matte Blue) --- */
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* --- Secondary Outline / Card Button --- */
+.btn-secondary {
+  background-color: var(--bg-card);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(0, 74, 198, 0.08);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* --- Danger / Alert Button Variant --- */
+.btn-danger {
+  background-color: var(--accent-danger);
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background-color: var(--accent-danger-hover);
+}
+
+/* --- Warning / Alert Button Variant --- */
+.btn-warning {
+  background-color: var(--accent-warning);
+  color: var(--text-inverse);
+}
+
+.btn-warning:hover {
+  background-color: var(--accent-warning-hover);
+}
+
+/* --- Utility Modifiers --- */
+.btn-full {
+  width: 100%;
+}
+
+/* --- Icon Square Action Button --- */
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.icon-button:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-card-hover);
+  border-color: var(--border-medium);
+}
+
+/* --- Panel Card Footer Button --- */
+.panel-footer-btn {
+  width: 100%;
+  height: 40px;
+  margin-top: var(--sp-4);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.panel-footer-btn:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.btn-ghost-primary {
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--accent-primary);
+  background: rgba(0, 74, 198, 0.08);
+  border: 1px solid rgba(0, 74, 198, 0.2);
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  cursor: pointer;
+  font-weight: var(--fw-medium);
+}
+
+.btn-ghost-primary:hover {
+  color: #ffffff;
+  background-color: var(--accent-primary);
+}
+
+.btn-ghost-danger {
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--accent-danger);
+  background: var(--accent-danger-light);
+  border: 1px solid rgba(186, 26, 26, 0.2);
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  cursor: pointer;
+  font-weight: var(--fw-medium);
+}
+
+.btn-ghost-danger:hover {
+  color: #ffffff;
+  background-color: var(--accent-danger);
+}

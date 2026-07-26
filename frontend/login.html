@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Operator - Warehouse App</title>
+  <meta name="description" content="Sistem Login Operator Warehouse App Warehouse Management System">
+  <link rel="stylesheet" href="css/pages/login.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="login-body">
+  <main class="login-split-container">
+    <!-- LEFT COLUMN: MINIMAL DARK FORM PANEL -->
+    <section class="login-form-panel">
+      <div>
+        <header class="login-header-group">
+          <h1 class="login-title-main">Login</h1>
+          <p class="login-subtitle-main">Enter your account details</p>
+        </header>
+
+        <form id="loginForm">
+          <!-- Operator ID Field -->
+          <div class="minimal-form-group">
+            <label for="operatorId" class="minimal-label">Username / Operator ID</label>
+            <div class="minimal-input-wrapper">
+              <input type="text" id="operatorId" class="minimal-input font-mono" placeholder="Masukkan ID Anda" required
+                autocomplete="username" value="Bambang--01" />
+            </div>
+          </div>
+
+          <!-- Access Code Field -->
+          <div class="minimal-form-group">
+            <label for="accessCode" class="minimal-label">Password / Access Code</label>
+            <div class="minimal-input-wrapper">
+              <input type="password" id="accessCode" class="minimal-input font-mono" placeholder="••••••••" required
+                autocomplete="current-password" value="12345678" />
+              <button type="button" id="passwordToggleBtn" class="minimal-toggle-btn" title="Lihat Password">
+                <i data-lucide="eye" id="eyeIcon" style="width: 18px; height: 18px;"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="forgot-link-row">
+            <a href="#" id="resetCodeLink" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn login-pill-btn">Login</button>
+        </form>
+      </div>
+
+      <!-- Footer Info -->
+      <footer class="login-panel-footer">
+        <span>Don't have an account?</span>
+        <button type="button" id="supportBtn" class="support-badge-btn">IT Support</button>
+      </footer>
+    </section>
+
+    <!-- RIGHT COLUMN: FULL-COVER HERO PHOTO PANEL -->
+    <section class="login-hero-panel">
+      <div class="hero-text-header">
+        <h2 class="hero-main-title">Welcome to<br>Warehouse App</h2>
+        <p class="hero-main-subtitle">Login to access your warehouse account</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS Dependencies -->
+  <script src="js/services/storage.service.js"></script>
+  <script src="js/views/login.view.js"></script>
+</body>
+
+</html>

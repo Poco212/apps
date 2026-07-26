@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Warehouse App - BAR CHART & CAPACITY WIDGET STYLES
+   File: frontend/css/components/charts.css
+   ========================================================================== */
+
+/* Period Filter Buttons */
+.period-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.period-btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.period-btn.active {
+  background-color: var(--bg-card-hover);
+  color: var(--accent-primary);
+  font-weight: var(--fw-semibold);
+}
+
+/* Custom Bar Chart */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+.legend-dot.inbound {
+  background-color: var(--accent-info);
+}
+
+.legend-dot.outbound {
+  background-color: var(--accent-warning);
+}
+
+.bar-chart-container {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: var(--sp-4);
+  gap: var(--sp-3);
+  position: relative;
+}
+
+.chart-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  position: relative;
+  cursor: pointer;
+}
+
+.bars-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 160px;
+  width: 100%;
+  justify-content: center;
+}
+
+.bar {
+  width: 12px;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.3s ease, filter 0.15s ease;
+}
+
+.bar.inbound {
+  background-color: var(--accent-info);
+}
+
+.bar.outbound {
+  background-color: var(--accent-warning);
+}
+
+.chart-column:hover .bar {
+  filter: brightness(1.25);
+}
+
+.chart-day-label {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* Floating Chart Tooltip */
+.chart-tooltip-popup {
+  position: absolute;
+  top: -45px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+  z-index: 50;
+  display: flex;
+  gap: 8px;
+}

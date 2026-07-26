@@ -1,0 +1,140 @@
+/* ==========================================================================
+   
+   ========================================================================== */
+
+@import url('../tokens.css');
+
+/* --- Sidebar Fixed Container --- */
+.sidebar {
+  width: 240px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: fixed;
+  top: 64px; /* Below top header bar */
+  bottom: 0;
+  left: 0;
+  z-index: 80;
+  transition: var(--transition-normal);
+}
+
+/* Sidebar Nav List */
+.sidebar-nav {
+  padding: var(--sp-5) var(--sp-3);
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.nav-item-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: var(--transition-fast);
+}
+
+.nav-item:hover {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.nav-item:hover .nav-item-icon {
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  font-weight: var(--fw-semibold);
+}
+
+.nav-item.active .nav-item-icon {
+  color: #ffffff;
+}
+
+/* Nav Submenu Collapsible Accordion */
+.nav-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-submenu {
+  display: none;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  gap: 3px;
+}
+
+.nav-group.open .nav-submenu {
+  display: flex;
+}
+
+.nav-group.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.chevron-icon {
+  transition: var(--transition-fast);
+  color: var(--text-tertiary);
+}
+
+.submenu-item {
+  padding: 8px 16px;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.submenu-item:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+}
+
+.submenu-item.active {
+  color: var(--accent-primary);
+  background-color: var(--accent-primary-light);
+  font-weight: var(--fw-semibold);
+}
+
+.sidebar-footer {
+  padding: var(--sp-4);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+
+

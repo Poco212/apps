@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Warehouse App - TOAST NOTIFICATION COMPONENTS
+   File: frontend/css/components/toast.css
+   ========================================================================== */
+
+@import url('../tokens.css');
+
+/* --- Toast Container Position --- */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  pointer-events: none;
+}
+
+/* --- Floating Toast Card --- */
+.toast {
+  pointer-events: auto;
+  min-width: 300px;
+  padding: 14px 18px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  animation: slideInRight 0.3s ease;
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color Variants */
+.toast.success {
+  border-left: 4px solid var(--accent-success);
+}
+
+.toast.danger {
+  border-left: 4px solid var(--accent-danger);
+}
+
+.toast.info {
+  border-left: 4px solid var(--accent-info);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

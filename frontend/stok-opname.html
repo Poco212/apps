@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stok Opname - LogiTrack Pro WMS</title>
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div id="toastContainer" class="toast-container"></div>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="layout-dashboard"></i></span><span>Dashboard</span></div>
+        </a>
+        <div class="nav-group open" id="persediaanGroup">
+          <div class="nav-item" id="persediaanGroupToggle">
+            <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="package"></i></span><span>Persediaan</span></div><i data-lucide="chevron-down" class="chevron-icon"></i>
+          </div>
+          <div class="nav-submenu">
+            <a href="katalog-barang.html" class="submenu-item"><span>Katalog Barang</span></a>
+            <a href="barang-masuk.html" class="submenu-item"><span>Barang Masuk</span></a>
+            <a href="barang-keluar.html" class="submenu-item"><span>Barang Keluar</span></a>
+            <a href="stok-opname.html" class="submenu-item active"><span>Stok Opname</span></a>
+            <a href="stok-minimum.html" class="submenu-item"><span>Cek Stok Minimum</span></a>
+          </div>
+        </div>
+        <a href="pemasok.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="truck"></i></span><span>Pemasok</span></div>
+        </a>
+        <a href="karyawan.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="users"></i></span><span>Karyawan</span></div>
+        </a>
+        <a href="aset.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="boxes"></i></span><span>Aset Gudang</span></div>
+        </a>
+        <a href="laporan.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="file-bar-chart"></i></span><span>Laporan</span></div>
+        </a>
+      </nav>
+      <footer class="sidebar-footer">
+        <div class="nav-item" id="logoutBtn">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="log-out"></i></span><span>Logout</span></div>
+        </div>
+      </footer>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-brand"><div class="brand-icon"><img src="assets/images/logo.png" alt="LogiTrack Pro Logo" class="brand-logo-img" /></div><div class="brand-info"><span class="brand-name">LogiTrack Pro</span><span class="brand-sub">Warehouse ID: WH-882</span></div></div>
+        <div class="header-search"><span class="header-search-icon"><i data-lucide="search"></i></span><input type="text" id="globalSearchInput" class="header-search-input" placeholder="Cari stok opname..." /></div>
+        <div class="header-actions">
+          <button type="button" id="refreshDataBtn" class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i><span>Refresh Data</span></button>
+          <div class="user-profile-btn">
+            <div class="avatar" id="userAvatar">BS</div><span class="user-name" id="userNameDisplay">Budi Santoso</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section id="viewStokOpname" class="view-panel">
+          <header class="page-header">
+            <div class="page-title-box">
+              <h1>Stok Opname</h1>
+              <p>Pemeriksaan dan penyesuaian jumlah stok fisik secara riil vs stok sistem</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" data-open-modal="opnameModal">+ Input Stok Opname</button>
+          </header>
+
+          <div class="card-panel">
+            <!-- FILTER TOOLBAR (This Week, Category, Status) -->
+            <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:center; background:#f8fafc; padding:10px 14px; border-radius:6px; border:1px solid #e2e8f0;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:11px; font-weight:600; color:#64748b; text-transform:uppercase;">PERIODE:</span>
+                <select id="opnamePeriodFilter" class="form-select font-mono" style="padding:4px 8px; font-size:12px;" onchange="renderStokOpname()">
+                  <option value="this-week">Minggu Ini (This Week)</option>
+                  <option value="this-month">Bulan Ini</option>
+                  <option value="all" selected>Semua Tanggal</option>
+                </select>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:11px; font-weight:600; color:#64748b; text-transform:uppercase;">KATEGORI:</span>
+                <select id="opnameCategoryFilter" class="form-select font-mono" style="padding:4px 8px; font-size:12px;" onchange="renderStokOpname()">
+                  <option value="all" selected>Semua Kategori</option>
+                  <option value="Bahan Bangunan">Bahan Bangunan</option>
+                  <option value="Cat & Coating">Cat & Coating</option>
+                  <option value="Elektrikal">Elektrikal</option>
+                  <option value="Kayu & Papan">Kayu & Papan</option>
+                  <option value="Besi & Baja">Besi & Baja</option>
+                  <option value="Plumbing">Plumbing</option>
+                  <option value="Hardware">Hardware</option>
+                </select>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:11px; font-weight:600; color:#64748b; text-transform:uppercase;">STATUS SELISIH:</span>
+                <select id="opnameStatusFilter" class="form-select font-mono" style="padding:4px 8px; font-size:12px;" onchange="renderStokOpname()">
+                  <option value="all" selected>Semua Status</option>
+                  <option value="match">✓ Stok Sesuai (0)</option>
+                  <option value="surplus">+ Kelebihan Stok</option>
+                  <option value="deficit">- Kekurangan Stok</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>TANGGAL OPNAME</th>
+                    <th>NAMA BARANG</th>
+                    <th>STOK SISTEM</th>
+                    <th>STOK FISIK</th>
+                    <th>SELISIH</th>
+                    <th>KETERANGAN / ANOMALI</th>
+                  </tr>
+                </thead>
+                <tbody id="stokOpnameTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL INPUT STOK OPNAME -->
+  <div id="opnameModal" class="modal-overlay">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3 class="modal-title">Input Stok Opname</h3><button type="button" class="modal-close-btn" data-close-modal="opnameModal">✕</button>
+      </header>
+      <form id="opnameForm">
+        <div class="modal-body">
+          <div class="form-group"><label for="opnameItemSelect" class="form-label">BARANG YANG DIAUDIT</label>
+            <div class="input-wrapper"><i data-lucide="package" class="input-icon"></i><select id="opnameItemSelect" class="form-select font-mono" required></select></div>
+          </div>
+          <div class="form-group"><label for="opnameQtyInput" class="form-label">STOK FISIK (HASIL HITUNG RIIL)</label>
+            <div class="input-wrapper"><i data-lucide="layers" class="input-icon"></i><input type="number" id="opnameQtyInput" class="form-input font-mono" min="0" required /></div>
+          </div>
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label for="opnameDateInput" class="form-label" style="margin:0;">TANGGAL PEMERIKSAAN</label>
+              <button type="button" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:11px;" onclick="setTodayDate('opnameDateInput')">📅 Hari Ini</button>
+            </div>
+            <div class="input-wrapper"><i data-lucide="calendar" class="input-icon"></i><input type="date" id="opnameDateInput" class="form-input font-mono" required /></div>
+          </div>
+          <div class="form-group"><label for="opnameKetInput" class="form-label">CATATAN / KETERANGAN AUDIT</label>
+            <div class="input-wrapper"><i data-lucide="file-text" class="input-icon"></i><input type="text" id="opnameKetInput" class="form-input" placeholder="Stok sesuai / Susut gudang" required /></div>
+          </div>
+        </div>
+        <footer class="modal-footer"><button type="button" class="btn btn-secondary" data-close-modal="opnameModal">Batal</button><button type="submit" class="btn btn-primary">Simpan Hasil Opname</button></footer>
+      </form>
+    </div>
+  </div>
+
+  <template id="opnameRowTemplate">
+    <tr>
+      <td class="tanggal font-mono"></td>
+      <td class="barang" style="font-weight: 600;"></td>
+      <td class="sistem font-mono"></td>
+      <td class="fisik font-mono" style="font-weight: 600;"></td>
+      <td class="selisih font-mono"></td>
+      <td class="keterangan text-muted"></td>
+    </tr>
+  </template>
+
+  <!-- JS Dependencies -->
+  <script src="js/models/inventory.model.js"></script>
+  <script src="js/services/storage.service.js"></script>
+  <script src="js/services/crud.service.js"></script>
+  <script src="js/services/inventory.service.js"></script>
+  <script src="js/components/toast.component.js"></script>
+  <script src="js/components/chart.component.js"></script>
+  <script src="js/views/tables.view.js"></script>
+  <script src="js/views/search.view.js"></script>
+  <script src="js/views/modals.view.js"></script>
+  <script src="js/views/dashboard.view.js"></script>
+</body>
+
+</html>
