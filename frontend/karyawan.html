@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karyawan - LogiTrack Pro WMS</title>
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div id="toastContainer" class="toast-container"></div>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="layout-dashboard"></i></span><span>Dashboard</span></div>
+        </a>
+        <div class="nav-group open" id="persediaanGroup">
+          <div class="nav-item" id="persediaanGroupToggle">
+            <div class="nav-item-content"><span class="nav-item-icon"><i
+                  data-lucide="package"></i></span><span>Persediaan</span></div><i data-lucide="chevron-down"
+              class="chevron-icon"></i>
+          </div>
+          <div class="nav-submenu">
+            <a href="katalog-barang.html" class="submenu-item"><span>Katalog Barang</span></a>
+            <a href="barang-masuk.html" class="submenu-item"><span>Barang Masuk</span></a>
+            <a href="barang-keluar.html" class="submenu-item"><span>Barang Keluar</span></a>
+            <a href="stok-opname.html" class="submenu-item"><span>Stok Opname</span></a>
+            <a href="stok-minimum.html" class="submenu-item"><span>Cek Stok Minimum</span></a>
+          </div>
+        </div>
+        <a href="pemasok.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="truck"></i></span><span>Pemasok</span></div>
+        </a>
+        <a href="karyawan.html" class="nav-item active">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="users"></i></span><span>Karyawan</span></div>
+        </a>
+        <a href="aset.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i data-lucide="boxes"></i></span><span>Aset
+              Gudang</span></div>
+        </a>
+        <a href="laporan.html" class="nav-item">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="file-bar-chart"></i></span><span>Laporan</span></div>
+        </a>
+      </nav>
+      <footer class="sidebar-footer">
+        <div class="nav-item" id="logoutBtn">
+          <div class="nav-item-content"><span class="nav-item-icon"><i
+                data-lucide="log-out"></i></span><span>Logout</span></div>
+        </div>
+      </footer>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-brand">
+          <div class="brand-icon"><img src="assets/images/logo.png" alt="LogiTrack Pro Logo" class="brand-logo-img" />
+          </div>
+          <div class="brand-info"><span class="brand-name">LogiTrack Pro</span><span class="brand-sub">Warehouse ID:
+              WH-882</span></div>
+        </div>
+        <div class="header-search"><span class="header-search-icon"><i data-lucide="search"></i></span><input
+            type="text" id="globalSearchInput" class="header-search-input" placeholder="Cari karyawan..." /></div>
+        <div class="header-actions">
+          <button type="button" id="refreshDataBtn" class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw"
+              style="width:14px;height:14px;"></i><span>Refresh Data</span></button>
+          <div class="user-profile-btn">
+            <div class="avatar" id="userAvatar">BS</div><span class="user-name" id="userNameDisplay">Budi Santoso</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section id="viewKaryawan" class="view-panel">
+          <header class="page-header">
+            <div class="page-title-box">
+              <h1>Data Karyawan Gudang</h1>
+              <p>Kelola daftar personel, operator, dan penanggung jawab gudang</p>
+            </div><button type="button" class="btn btn-primary btn-sm" data-open-modal="karyawanModal">+ Tambah
+              Karyawan</button>
+          </header>
+          <div class="card-panel">
+            <div class="table-container">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>NAMA KARYAWAN</th>
+                    <th>UMUR</th>
+                    <th>JENIS KELAMIN</th>
+                    <th>JABATAN</th>
+                    <th>ALAMAT</th>
+                    <th>TELEPON</th>
+                    <th>EMAIL</th>
+                    <th>TANGGAL MASUK</th>
+                    <th>AKSI</th>
+                  </tr>
+                </thead>
+                <tbody id="karyawanTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="karyawanModal" class="modal-overlay">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3 class="modal-title" id="karyawanModalTitle">Tambah Data Karyawan</h3><button type="button"
+          class="modal-close-btn" data-close-modal="karyawanModal">✕</button>
+      </header>
+      <form id="karyawanForm"><input type="hidden" id="karyawanIdInput" />
+        <div class="modal-body">
+          <div class="form-group"><label for="karyawanNamaInput" class="form-label">NAMA KARYAWAN</label>
+            <div class="input-wrapper"><i data-lucide="user" class="input-icon"></i><input type="text"
+                id="karyawanNamaInput" class="form-input" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanUmurInput" class="form-label">UMUR (TAHUN)</label>
+            <div class="input-wrapper"><i data-lucide="hash" class="input-icon"></i><input type="number"
+                id="karyawanUmurInput" class="form-input font-mono" min="18" value="25" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanJkSelect" class="form-label">JENIS KELAMIN</label>
+            <div class="input-wrapper"><i data-lucide="user-check" class="input-icon"></i><select id="karyawanJkSelect"
+                class="form-select font-mono">
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select></div>
+          </div>
+          <div class="form-group"><label for="karyawanJabatanInput" class="form-label">JABATAN</label>
+            <div class="input-wrapper"><i data-lucide="briefcase" class="input-icon"></i><input type="text"
+                id="karyawanJabatanInput" class="form-input" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanAlamatInput" class="form-label">ALAMAT DOMISILI</label>
+            <div class="input-wrapper"><i data-lucide="map-pin" class="input-icon"></i><input type="text"
+                id="karyawanAlamatInput" class="form-input" placeholder="Jl. Merdeka No. 12, Jakarta" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanMasukInput" class="form-label">TANGGAL MASUK KERJA</label>
+            <div class="input-wrapper"><i data-lucide="calendar" class="input-icon"></i><input type="date"
+                id="karyawanMasukInput" class="form-input font-mono" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanTeleponInput" class="form-label">TELEPON</label>
+            <div class="input-wrapper"><i data-lucide="phone" class="input-icon"></i><input type="text"
+                id="karyawanTeleponInput" class="form-input font-mono" required /></div>
+          </div>
+          <div class="form-group"><label for="karyawanEmailInput" class="form-label">EMAIL</label>
+            <div class="input-wrapper"><i data-lucide="mail" class="input-icon"></i><input type="email"
+                id="karyawanEmailInput" class="form-input font-mono" required /></div>
+          </div>
+        </div>
+        <footer class="modal-footer"><button type="button" class="btn btn-secondary"
+            data-close-modal="karyawanModal">Batal</button><button type="submit" class="btn btn-primary"
+            id="karyawanSubmitBtn">Simpan Karyawan</button></footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- TEMPLATE FOR PURE JS DOM CLONING -->
+  <template id="karyawanRowTemplate">
+    <tr>
+      <td class="nama" style="font-weight: 600;"></td>
+      <td class="umur font-mono"></td>
+      <td class="jk"></td>
+      <td class="jabatan"></td>
+      <td class="alamat text-muted"></td>
+      <td class="telepon font-mono"></td>
+      <td class="email font-mono text-info"></td>
+      <td class="masuk font-mono text-muted"></td>
+      <td>
+        <button type="button" class="btn-edit btn-ghost-primary">Edit</button>
+        <button type="button" class="btn-delete btn-ghost-danger">Hapus</button>
+      </td>
+    </tr>
+  </template>
+
+  <!-- JS Dependencies -->
+  <script src="js/models/inventory.model.js"></script>
+  <script src="js/services/storage.service.js"></script>
+  <script src="js/services/crud.service.js"></script>
+  <script src="js/services/inventory.service.js"></script>
+  <script src="js/components/toast.component.js"></script>
+  <script src="js/components/chart.component.js"></script>
+  <script src="js/views/tables.view.js"></script>
+  <script src="js/views/search.view.js"></script>
+  <script src="js/views/modals.view.js"></script>
+  <script src="js/views/dashboard.view.js"></script>
+</body>
+
+</html>

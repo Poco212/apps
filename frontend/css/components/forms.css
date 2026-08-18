@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Warehouse App - FORM & INPUT COMPONENTS
+   File: frontend/css/components/forms.css
+   ========================================================================== */
+
+@import url('../tokens.css');
+
+/* --- Form Container Group --- */
+.form-group {
+  margin-bottom: var(--sp-5);
+}
+
+.form-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+}
+
+.form-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.form-link {
+  font-size: var(--fs-xs);
+  color: var(--accent-info);
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+
+.form-link:hover {
+  text-decoration: underline;
+  color: var(--text-primary);
+}
+
+/* --- Input Field Wrapper & Icon Position --- */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- Form Text Input & Select --- */
+.form-input,
+.form-select {
+  width: 100%;
+  height: 44px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 0 14px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.input-wrapper .form-input,
+.input-wrapper .form-select {
+  padding-left: 42px;
+}
+
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2594A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Password Toggle Eye Button */
+.password-toggle-btn {
+  position: absolute;
+  right: 14px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.password-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+/* --- Header Global Search Bar --- */
+.header-search {
+  position: relative;
+  width: 320px;
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.header-search-input {
+  width: 100%;
+  height: 38px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 0 14px 0 38px;
+  font-size: var(--fs-xs);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.header-search-input:focus {
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}

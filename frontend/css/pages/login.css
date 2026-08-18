@@ -1,0 +1,197 @@
+/* ==========================================================================
+   
+   ========================================================================== */
+
+@import url('../tokens.css');
+@import url('../reset.css');
+@import url('../components/buttons.css');
+@import url('../components/forms.css');
+
+.login-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  background-color: var(--bg-app);
+  padding: var(--sp-6);
+}
+
+.login-split-container {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  width: 100%;
+  max-width: 960px;
+  min-height: 540px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.login-form-panel {
+  padding: 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+}
+
+.login-header-group {
+  margin-bottom: 36px;
+}
+
+.login-title-main {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.login-subtitle-main {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+.minimal-form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.minimal-label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.minimal-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.minimal-input {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  padding: 10px 14px;
+  transition: var(--transition-fast);
+}
+
+.minimal-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 74, 198, 0.12);
+}
+
+.minimal-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.forgot-link-row {
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.forgot-link {
+  font-size: var(--fs-xs);
+  color: var(--accent-primary);
+  font-weight: var(--fw-medium);
+}
+
+.login-pill-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  border: none;
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.login-pill-btn:hover {
+  background: var(--accent-primary-hover);
+  transform: translateY(-1px);
+}
+
+.login-panel-footer {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.support-badge-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  border: 1px solid var(--border-subtle);
+}
+
+.login-hero-panel {
+  position: relative;
+  background-color: #0f172a;
+  background-image:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.88) 100%),
+    url('../../assets/images/indomaret.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-main-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero-main-subtitle {
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 8px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+
+@media (max-width: 840px) {
+  .login-split-container {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+  }
+  .login-hero-panel {
+    display: none;
+  }
+}

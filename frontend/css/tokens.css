@@ -1,0 +1,97 @@
+/* ==========================================================================
+   
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Canvas & Layer Background Colors (Clean Light Mode) */
+  --bg-app: #f8f9ff;            /* Soft Off-White / Ice Blue Canvas */
+  --bg-sidebar: #ffffff;        /* Pure Crisp White Sidebar Surface */
+  --bg-sidebar-active: #004ac6;
+  --bg-card: #ffffff;           /* Pure Crisp White Bento Surface */
+  --bg-card-hover: #f1f5f9;     /* Card Hover Surface */
+  --bg-input: #f1f5f9;          /* Form Input Surface */
+  --bg-modal-overlay: rgba(15, 23, 42, 0.5);
+
+  /* Subtle Borders & Dividers */
+  --border-subtle: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-active: #004ac6;
+
+  /* Typography Colors (High Contrast Legibility) */
+  --text-primary: #0b1c30;      /* Deep Navy Slate Text */
+  --text-secondary: #454748;    /* Muted Labels & Descriptions */
+  --text-tertiary: #737686;     /* Deemphasized Subtitles */
+  --text-inverse: #ffffff;
+
+  /* Restrained Font Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Industrial Accents (Royal Blue, Amber, Crimson Red) */
+  --accent-primary: #004ac6;
+  --accent-primary-hover: #003ea8;
+  --accent-primary-light: #dbe1ff;
+
+  --accent-chart-in: #004ac6;   /* Royal Blue Bar Chart & Inbound */
+  --accent-chart-in-light: #dbe1ff;
+
+  --accent-chart-out: #bc4800;  /* Terracotta / Soft Amber Bar Chart & Outbound */
+  --accent-chart-out-light: #ffdbcd;
+
+  --accent-danger: #ba1a1a;     /* Crimson Red (Stok Kritis / Alert) */
+  --accent-danger-hover: #93000a;
+  --accent-danger-light: #ffdad6;
+
+  --accent-warning: #d97706;
+  --accent-warning-light: #fef3c7;
+
+  --accent-success: #16a34a;
+  --accent-success-light: #dcfce7;
+
+  --accent-info: #0284c7;
+  --accent-info-light: #e0f2fe;
+
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Font Sizes */
+  --fs-xs: 0.75rem;    /* 12px */
+  --fs-sm: 0.875rem;   /* 14px */
+  --fs-base: 1rem;     /* 16px */
+  --fs-lg: 1.125rem;   /* 18px */
+  --fs-xl: 1.25rem;    /* 20px */
+  --fs-2xl: 1.5rem;    /* 24px */
+  --fs-3xl: 2rem;      /* 32px */
+
+  /* Spacing Scale */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 24px;   /* Stitch 24px Bento Corners */
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Soft Elevation Shadows (Light Mode) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.08);
+
+  /* Standard Micro-Interaction Durations */
+  --transition-fast: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+

@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Warehouse App - DATA TABLE & BADGE COMPONENTS
+   File: frontend/css/components/tables.css
+   ========================================================================== */
+
+@import url('../tokens.css');
+
+/* --- Responsive Table Wrapper --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Base Custom Data Table --- */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-xs);
+}
+
+/* Table Header Row */
+.custom-table th {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: rgba(255, 255, 255, 0.015);
+  white-space: nowrap;
+}
+
+/* Table Data Row */
+.custom-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  vertical-align: middle;
+  transition: var(--transition-fast);
+}
+
+/* Item Name with Category Icon */
+.item-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cat-icon {
+  color: var(--accent-chart-in);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+/* Hover Highlight Effect */
+.custom-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.025);
+}
+
+/* Empty Table State */
+.custom-table td.empty-state {
+  text-align: center;
+  padding: var(--sp-8);
+  color: var(--text-secondary);
+}
+
+/* --- Status Badges (Pills) --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  font-family: var(--font-mono);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Badge 1: Inbound Transaksi (Soft Light Blue) */
+.badge-inbound {
+  background-color: var(--accent-chart-in-light);
+  color: var(--accent-chart-in);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Badge 2: Outbound Transaksi (Soft Amber / Orange) */
+.badge-outbound {
+  background-color: var(--accent-chart-out-light);
+  color: var(--accent-chart-out);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+/* Badge 3: Success Status (Emerald Green) */
+.badge-success {
+  background-color: var(--accent-success-light);
+  color: var(--accent-success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+/* Badge 4: Danger / Kritis Status (Crimson Red) */
+.badge-danger {
+  background-color: var(--accent-danger-light);
+  color: var(--accent-danger);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
