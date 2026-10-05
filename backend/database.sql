@@ -2,7 +2,7 @@ CREATE DATABASE warehouse_db;
 USE warehouse_db;
 
 -- Tabel Barang
-CREATE TABLE barang (
+CREATE TABLE kategori_barang (
     id INT AUTO_INCREMENT PRIMARY KEY,
     kode_barang VARCHAR(50) NOT NULL,
     nama_barang VARCHAR(255) NOT NULL,
